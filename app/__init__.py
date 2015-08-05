@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from collections import deque
 import os
 
 
@@ -18,6 +19,24 @@ db = SQLAlchemy(app)
 from app import views, models
 
 db.create_all()
-reg = models.Region('terra', [1, 2, 3])
-db.session.add(reg)
+
+regions = deque()
+regions.append(models.Region('terra', [2]))  # 1
+regions.append(models.Region('markee', [1]))  # 2
+regions.append(models.Region('heim', [1, 2]))  # 3
+
+for region in regions:
+    db.session.add(region)
+
+cities = deque()
+cities.append(models.City('steepes', 1))
+cities.append(models.City('danggg', 1))
+cities.append(models.City('planes', 2))
+cities.append(models.City('forest', 2))
+cities.append(models.City('castle', 3))
+cities.append(models.City('toilet', 3))
+
+for city in cities:
+    db.session.add(city)
+
 db.session.commit()
