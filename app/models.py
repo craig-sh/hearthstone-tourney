@@ -27,13 +27,11 @@ class City(db.Model):
     # QUESTION: Why is the region below this lower case for foreign key
     # but upper case for the relationship
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
-    region = db.relationship('Region', backref=db.backref('cities',
-                                                          lazy='dynamic'))
+    region = db.relationship('Region', backref=db.backref('cities'))
 
     def __init__(self, nickname, region_id):
         self.nickname = nickname
         self.region_id = region_id
-        self.region = Region.query.filter_by(id=region_id).first()
 
     def __repr__(self):
         return 'City[%s] %s' % (self.id, self.nickname)
@@ -50,3 +48,65 @@ class Region(db.Model):
 
     def __repr__(self):
         return 'Region[%s] %s' % (self.id, self.nickname)
+
+
+class RegionState(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('player.id'))
+    health = db.Column(db.Integer, default=30)
+
+    def __init__(self, region_id, owner_id, health=None):
+        self.region_id = region_id
+        self.owner_id = owner_id
+        if health is not None:
+            self.health = health
+
+
+class Player(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), index=True, unique=True)
+
+    def __init__(self, name):
+        self.name = name
+
+
+class Hsclass(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), index=True, unique=True)
+
+    def __init__(self, name):
+        self.name = name
+
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    attacker_id = db.Column(db.Integer, db.ForeignKey('player.id'))
+    defender_id = db.Column(db.Integer, db.ForeignKey('player.id'))
+    winner_id = db.Column(db.Integer, db.ForeignKey('player.id'))
+    attacker_class_id = db.Column(db.Integer, db.ForeignKey('hsclass.id'))
+    defender_class_id = db.Column(db.Integer, db.ForeignKey('hsclass.id'))
+    attacker_city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
+    defender_city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
+
+    def __init__(self, attacker, defender,
+                 winner,
+                 attacker_class, defender_class,
+                 attacker_city, defender_city):
+        self.attacker_id = attacker
+        self.defender_id = defender
+        self.winner_id = winner
+        self.attacker_class_id = attacker_class
+        self.defender_class_id = defender_class
+        self.attacker_city_id = attacker_city
+        self.defender_city_id = defender_city
+
+
+class Turn(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    turn = db.Column(db.Integer, index=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('player.id'), index=True)
+
+    def __init__(self, turn, player_id):
+        self.turn = turn
+        self.player_id = player_id

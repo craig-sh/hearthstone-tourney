@@ -39,4 +39,29 @@ cities.append(models.City('toilet', 3))
 for city in cities:
     db.session.add(city)
 
+players = deque()
+players.append(models.Player('Kai1'))
+players.append(models.Player('Kai2'))
+players.append(models.Player('Kai3'))
+
+for player in players:
+    db.session.add(player)
+
+classes = deque()
+classes.append(models.Hsclass('Priest'))
+classes.append(models.Hsclass('Warrior'))
+classes.append(models.Hsclass('Shaman'))
+
+for hsclass in classes:
+    db.session.add(hsclass)
+
+# reg_states = deque()
+# reg_states.append(1, 1)
+# reg_states.append(2, 1)
+# reg_states.append(3, 2)
+# reg_states.append(4, 2)
+# reg_states.append(5, 2)
+# reg_states.append(6, 2)
+
+
 db.session.commit()
