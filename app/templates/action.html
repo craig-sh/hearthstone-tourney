@@ -1,0 +1,18 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Action</h1>
+  <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <p>
+          Attacker:<br>
+          {{ form.attacker(size=80) }}<br>
+      </p>
+      <p>
+          Defender:<br>
+          {{ form.defender(size=80) }}<br>
+      </p>
+      <p><input type="submit" value="Process"></p>
+  </form>
+{% endblock %}

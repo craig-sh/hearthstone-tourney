@@ -1,8 +1,10 @@
-<html>
-  <head>
-    <title>Hail Kai</title>
-  </head>
-  <body>
-      <h1>{{cities}}</h1>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+    <ul id="cities">
+    {% for city in cities %}
+        <li>
+            {{ city.nickname }}: {{city.state.owner.name}} {{city.state.health}}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

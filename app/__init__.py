@@ -27,6 +27,7 @@ regions.append(models.Region('heim', [1, 2]))  # 3
 
 for region in regions:
     db.session.add(region)
+db.session.flush()
 
 cities = deque()
 cities.append(models.City('steepes', 1))
@@ -38,6 +39,8 @@ cities.append(models.City('toilet', 3))
 
 for city in cities:
     db.session.add(city)
+db.session.flush()
+
 
 players = deque()
 players.append(models.Player('Kai1'))
@@ -46,6 +49,7 @@ players.append(models.Player('Kai3'))
 
 for player in players:
     db.session.add(player)
+db.session.flush()
 
 classes = deque()
 classes.append(models.Hsclass('Priest'))
@@ -54,14 +58,18 @@ classes.append(models.Hsclass('Shaman'))
 
 for hsclass in classes:
     db.session.add(hsclass)
+db.session.flush()
 
-# reg_states = deque()
-# reg_states.append(1, 1)
-# reg_states.append(2, 1)
-# reg_states.append(3, 2)
-# reg_states.append(4, 2)
-# reg_states.append(5, 2)
-# reg_states.append(6, 2)
+city_states = deque()
+city_states.append(models.CityState(1, 1))
+city_states.append(models.CityState(2, 1))
+city_states.append(models.CityState(3, 2))
+city_states.append(models.CityState(4, 3))
+city_states.append(models.CityState(5, 2))
+city_states.append(models.CityState(6, 3))
 
+for state in city_states:
+    db.session.add(state)
+db.session.flush()
 
 db.session.commit()
