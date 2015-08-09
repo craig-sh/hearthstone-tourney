@@ -5,14 +5,19 @@
   <h1>Action</h1>
   <form action="" method="post" name="action">
       {{ form.hidden_tag() }}
-      <p>
-          Attacker:<br>
-          {{ form.attacker(size=80) }}<br>
-      </p>
-      <p>
-          Defender:<br>
-          {{ form.defender(size=80) }}<br>
-      </p>
+    {% from "_form_helpers.html" import render_field %}
+    <dl>
+        {{ render_field(form.attacker) }}
+        {{ render_field(form.defender) }}
+
+        {{ render_field(form.winner) }}
+
+        {{ render_field(form.attacking_city) }}
+        {{ render_field(form.defending_city) }}
+
+        {{ render_field(form.attacking_class) }}
+        {{ render_field(form.defending_class) }}
+    </dl>
       <p><input type="submit" value="Process"></p>
   </form>
 {% endblock %}

@@ -119,6 +119,19 @@ class Event(db.Model):
         self.attacker_city_id = attacker_city
         self.defender_city_id = defender_city
 
+    def process_event(self):
+        db.session.add(self)
+        db.session.flush()
+        if self.winner_id == self.attacker_id:
+            self.defender_city.state.owner_id = self.attacker_id
+            self.defender_city.state.health -= 2
+            self.attacker_city.state.health -= 2
+        else:
+            self.defender_city.state.health -= 2
+            self.attacker_city.state.health -= 4
+
+        db.session.commit()
+
 
 class Turn(db.Model):
     id = db.Column(db.Integer, primary_key=True)
