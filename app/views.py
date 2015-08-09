@@ -7,10 +7,10 @@ from .forms import ActionForm
 @app.route('/')
 @app.route('/index')
 def index():
-    cities = models.City.query.all()
+    regions = models.Region.query.all()
     # flash('Testing flash')
     return render_template('index.html',
-                           cities=cities)
+                           regions=regions)
 
 
 @app.route('/action', methods=['GET', 'POST'])
@@ -22,8 +22,8 @@ def login():
         d_id = models.Player.query.filter_by(name=form.defender.data).first().id
         w_id = models.Player.query.filter_by(name=form.winner.data).first().id
 
-        a_city_id = models.City.query.filter_by(nickname=form.attacking_city.data).first().id
-        d_city_id = models.City.query.filter_by(nickname=form.defending_city.data).first().id
+        a_city_id = models.City.query.filter_by(name=form.attacking_city.data).first().id
+        d_city_id = models.City.query.filter_by(name=form.defending_city.data).first().id
 
         a_class_id = models.Hsclass.query.filter_by(name=form.attacking_class.data).first().id
         d_class_id = models.Hsclass.query.filter_by(name=form.defending_class.data).first().id

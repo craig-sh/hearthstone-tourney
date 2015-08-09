@@ -25,7 +25,7 @@ class ActionForm(Form):
             field.validators.append(AnyOf(values=_player_names,
                                           message='Must be one of %(values)s'))
 
-        _city_names = [m.nickname for m in models.City.query.all()]
+        _city_names = [m.name for m in models.City.query.all()]
         dynamic_city_validators = [self.attacking_city, self.defending_city]
         for field in dynamic_city_validators:
             field.validators.append(AnyOf(values=_city_names,

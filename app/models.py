@@ -23,31 +23,31 @@ class SqlLiteArray(types.TypeDecorator):
 
 class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nickname = db.Column(db.String(64), index=True, unique=True)
+    name = db.Column(db.String(64), index=True, unique=True)
     # QUESTION: Why is the region below this lower case for foreign key
     # but upper case for the relationship
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     region = db.relationship('Region', backref=db.backref('cities'))
 
-    def __init__(self, nickname, region_id):
-        self.nickname = nickname
+    def __init__(self, name, region_id):
+        self.name = name
         self.region_id = region_id
 
     def __repr__(self):
-        return 'City[%s] %s' % (self.id, self.nickname)
+        return 'City[%s] %s' % (self.id, self.name)
 
 
 class Region(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nickname = db.Column(db.String(64), index=True, unique=True)
+    name = db.Column(db.String(64), index=True, unique=True)
     adjacent_regions = db.Column(SqlLiteArray)
 
-    def __init__(self, nickname, adjacent_regions):
-        self.nickname = nickname
+    def __init__(self, name, adjacent_regions):
+        self.name = name
         self.adjacent_regions = adjacent_regions
 
     def __repr__(self):
-        return 'Region[%s] %s' % (self.id, self.nickname)
+        return 'Region[%s] %s' % (self.id, self.name)
 
 
 class CityState(db.Model):
