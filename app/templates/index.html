@@ -1,10 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-    <ul id="cities">
-    {% for city in cities %}
-        <li>
-            {{ city.nickname }}: {{city.state.owner.name}} {{city.state.health}}
-        </li>
-    {% endfor %}
-    </ul>
+    <div id="regions">
+        <table>
+            <th>Region</th>
+            <th>City</th>
+            <th>Owner</th>
+            <th>Health</th>
+            {% for region in regions %}
+                <tr>
+                    <td>{{ region.name }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% for city in region.cities %}
+                    <tr>
+                        <td></td>
+                        <td>{{ city.name }}</td>
+                        <td>{{ city.state.owner.name }}</td>
+                        <td>{{ city.state.health }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </table>
+
+    </table>
 {% endblock %}
