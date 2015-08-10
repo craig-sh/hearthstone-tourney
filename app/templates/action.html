@@ -1,7 +1,7 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
-
 {% block content %}
+<div class="container-fluid">
   <h1>Action</h1>
   <form action="" method="post" name="action">
       {{ form.hidden_tag() }}
@@ -20,4 +20,5 @@
     </dl>
       <p><input type="submit" value="Process"></p>
   </form>
+</div>
 {% endblock %}

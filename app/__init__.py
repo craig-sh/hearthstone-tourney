@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.bootstrap import Bootstrap
 from collections import deque
 import os
 
@@ -61,6 +62,7 @@ app.config.from_object('config')
 
 
 db = SQLAlchemy(app)
+bootstrap = Bootstrap(app)
 # the app in the import statement below is not the same
 # as the app variable above it. It does however import
 # the app variable which is why it is placed after instatiating
