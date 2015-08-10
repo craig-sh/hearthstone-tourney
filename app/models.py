@@ -1,5 +1,8 @@
 from app import db
 from sqlalchemy import types
+from datetime import datetime
+
+MAX_EVENTS_PER_DAY = 20
 
 
 class SqlLiteArray(types.TypeDecorator):
@@ -107,10 +110,13 @@ class Event(db.Model):
     defender_city_id = db.Column(db.Integer, db.ForeignKey('city.id'))
     defender_city = db.relationship('City', foreign_keys=defender_city_id)
 
+    event_date = db.Column(db.DateTime, default=datetime.utcnow())
+
     def __init__(self, attacker, defender,
                  winner,
                  attacker_class, defender_class,
-                 attacker_city, defender_city):
+                 attacker_city, defender_city,
+                 event_date=None):
         self.attacker_id = attacker
         self.defender_id = defender
         self.winner_id = winner
@@ -119,9 +125,17 @@ class Event(db.Model):
         self.attacker_city_id = attacker_city
         self.defender_city_id = defender_city
 
+        if event_date is not None:
+            self.event_date = event_date
+
     def process_event(self):
         db.session.add(self)
         db.session.flush()
+
+        today = datetime.today().date()
+        if Event.query.filter(Event.event_date > today).count() > MAX_EVENTS_PER_DAY:
+            raise Exception('Too many events today')
+
         if self.winner_id == self.attacker_id:
             self.defender_city.state.owner_id = self.attacker_id
             self.defender_city.state.health -= 2
