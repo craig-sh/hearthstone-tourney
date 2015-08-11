@@ -9,5 +9,7 @@ SECRET_KEY = secret_key
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-DB_FILE_PATH = os.path.join('/tmp', 'app.db')
+# DB_FILE_PATH = os.path.join('/tmp', 'app.db')
+DB_FILE_PATH = os.path.join(basedir, 'app.db')
+
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DB_FILE_PATH

@@ -16,11 +16,15 @@ class SqlLiteArray(types.TypeDecorator):
     def process_bind_param(self, value, dialect):
         """ Before inserting an array, combine it into one string
         """
-        return ' '.join([str(val) for val in value])
+        if value:
+            return ' '.join([str(val) for val in value])
+        return ''
 
     def process_result_value(self, value, dialect):
         """ On retrival convert it back to an int
         """
+        if not value:
+            return []
         return [int(val) for val in value.split(' ')]
 
 
@@ -74,9 +78,12 @@ class CityState(db.Model):
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), index=True, unique=True)
+    # http://www.w3schools.com/html/html_colornames.asp
+    color = db.Column(db.String(64), unique=True)
 
-    def __init__(self, name):
+    def __init__(self, name, color):
         self.name = name
+        self.color = color
 
 
 class Hsclass(db.Model):

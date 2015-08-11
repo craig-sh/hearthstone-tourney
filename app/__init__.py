@@ -6,33 +6,56 @@ import os
 
 
 def init_db():
-    regions = deque()
-    regions.append(models.Region('terra', [2]))  # 1
-    regions.append(models.Region('markee', [1]))  # 2
-    regions.append(models.Region('heim', [1, 2]))  # 3
+    regions = dict(
+        edmenheim=models.Region('Edmenheim', []),
+        yarg=models.Region('Yarg Forest', []),
+        lou=models.Region('Lou Highlands', []),
+        markee=models.Region('Markee Planes', []),
+        terra=models.Region("Terra D'Creg", []),
+        dang=models.Region('Dang Hazerath Steppes', []))
 
-    for region in regions:
+    for region in regions.values():
         db.session.add(region)
     db.session.flush()
 
-    cities = deque()
-    cities.append(models.City('steepes', 1))
-    cities.append(models.City('danggg', 1))
-    cities.append(models.City('planes', 2))
-    cities.append(models.City('forest', 2))
-    cities.append(models.City('castle', 3))
-    cities.append(models.City('toilet', 3))
+    cities = dict(
+        triplets=models.City('Triplets', regions['edmenheim'].id),
+        vorrros=models.City('Vorros Port', regions['edmenheim'].id),
 
-    for city in cities:
+        circle=models.City('The Circle', regions['yarg'].id),
+        cannibal=models.City('Cannibal Village', regions['yarg'].id),
+        big=models.City('Bigdee Place', regions['yarg'].id),
+
+        hug=models.City('Hugfarts', regions['lou'].id),
+        ash=models.City('Plato of Ashes', regions['lou'].id),
+        bat=models.City('Bat Caves', regions['lou'].id),
+
+        sands=models.City('Sands', regions['markee'].id),
+        ryangard=models.City('Ryangard', regions['markee'].id),
+        ryborg=models.City('Ryborg', regions['markee'].id),
+
+        citadel=models.City('Citadel', regions['terra'].id),
+        spikes=models.City('Spikes', regions['terra'].id),
+        temple=models.City('Temple of Kai', regions['terra'].id),
+
+        taro=models.City('Taro Rocks', regions['dang'].id),
+        dry=models.City('Dry Creek', regions['dang'].id),
+        east=models.City('East Zerath', regions['dang'].id),
+        high=models.City('High Borough', regions['dang'].id))
+
+    for city in cities.values():
         db.session.add(city)
     db.session.flush()
 
-    players = deque()
-    players.append(models.Player('Kai1'))
-    players.append(models.Player('Kai2'))
-    players.append(models.Player('Kai3'))
+    players = dict(
+        edmond=models.Player('Edmond', 'Orange'),
+        dang=models.Player('Dang', 'Red'),
+        mark=models.Player('Mark', 'Purple'),
+        craig=models.Player('Craig', 'Blue'),
+        david=models.Player('David', 'Green'),
+        ryan=models.Player('Ryan', 'Cyan'))
 
-    for player in players:
+    for player in players.values():
         db.session.add(player)
     db.session.flush()
 
@@ -40,20 +63,43 @@ def init_db():
     classes.append(models.Hsclass('Priest'))
     classes.append(models.Hsclass('Warrior'))
     classes.append(models.Hsclass('Shaman'))
+    classes.append(models.Hsclass('Warlock'))
+    classes.append(models.Hsclass('Druid'))
+    classes.append(models.Hsclass('Mage'))
+    classes.append(models.Hsclass('Hunter'))
+    classes.append(models.Hsclass('Rogue'))
+    classes.append(models.Hsclass('Paladin'))
 
     for hsclass in classes:
         db.session.add(hsclass)
     db.session.flush()
 
-    city_states = deque()
-    city_states.append(models.CityState(1, 1))
-    city_states.append(models.CityState(2, 1))
-    city_states.append(models.CityState(3, 2))
-    city_states.append(models.CityState(4, 3))
-    city_states.append(models.CityState(5, 2))
-    city_states.append(models.CityState(6, 3))
+    city_states = dict(
+        triplets=models.CityState(cities['triplets'].id, players['mark'].id),
+        vorrros=models.CityState(cities['vorrros'].id, players['mark'].id, 26),
 
-    for state in city_states:
+        circle=models.CityState(cities['circle'].id, players['mark'].id),
+        cannibal=models.CityState(cities['cannibal'].id, players['ryan'].id),
+        big=models.CityState(cities['big'].id, players['ryan'].id, 28),
+
+        hug=models.CityState(cities['hug'].id, players['ryan'].id),
+        ash=models.CityState(cities['ash'].id, players['craig'].id),
+        bat=models.CityState(cities['bat'].id, players['craig'].id, 26),
+
+        sands=models.CityState(cities['sands'].id, players['david'].id, 26),
+        ryangard=models.CityState(cities['ryangard'].id, players['ryan'].id),
+        ryborg=models.CityState(cities['ryborg'].id, players['ryan'].id, 26),
+
+        citadel=models.CityState(cities['citadel'].id, players['ryan'].id, 28),
+        spikes=models.CityState(cities['spikes'].id, players['dang'].id, 26),
+        temple=models.CityState(cities['temple'].id, players['craig'].id),
+
+        taro=models.CityState(cities['taro'].id, players['edmond'].id, 26),
+        dry=models.CityState(cities['dry'].id, players['ryan'].id),
+        east=models.CityState(cities['east'].id, players['edmond'].id),
+        high=models.CityState(cities['high'].id, players['dang'].id))
+
+    for state in city_states.values():
         db.session.add(state)
     db.session.flush()
 
