@@ -1,6 +1,7 @@
 /*.sublime-workspace
 /flask
 /secret_key.py
+/app.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

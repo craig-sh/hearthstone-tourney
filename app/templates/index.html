@@ -2,14 +2,14 @@
 {% block content %}
 <div class="container-fluid">
     <div id="regions">
-        <table class="table table-striped">
+        <table class="table table-hover table-bordered">
             <th>Region</th>
             <th>City</th>
             <th>Owner</th>
             <th>Health</th>
             {% for region in regions %}
                 {% for city in region.cities %}
-                    <tr>
+                    <tr bgcolor="{{city.state.owner.color}}">
                         <td>{{ region.name }}</td>
                         <td>{{ city.name }}</td>
                         <td>{{ city.state.owner.name }}</td>

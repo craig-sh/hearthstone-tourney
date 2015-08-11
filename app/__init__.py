@@ -49,10 +49,10 @@ def init_db():
 
     players = dict(
         edmond=models.Player('Edmond', 'Orange'),
-        dang=models.Player('Dang', 'Red'),
-        mark=models.Player('Mark', 'Purple'),
-        craig=models.Player('Craig', 'Blue'),
-        david=models.Player('David', 'Green'),
+        dang=models.Player('Dang', 'LightCoral'),
+        mark=models.Player('Mark', 'MediumPurple'),
+        craig=models.Player('Craig', 'LightSkyBlue'),
+        david=models.Player('David', 'LightGreen'),
         ryan=models.Player('Ryan', 'Cyan'))
 
     for player in players.values():
