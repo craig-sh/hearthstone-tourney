@@ -78,24 +78,24 @@ def init_db():
         triplets=models.CityState(cities['triplets'].id, players['mark'].id),
         vorrros=models.CityState(cities['vorrros'].id, players['mark'].id, 26),
 
-        circle=models.CityState(cities['circle'].id, players['mark'].id),
-        cannibal=models.CityState(cities['cannibal'].id, players['ryan'].id),
+        circle=models.CityState(cities['circle'].id, players['ryan'].id, 28),
+        cannibal=models.CityState(cities['cannibal'].id, players['ryan'].id, 28),
         big=models.CityState(cities['big'].id, players['ryan'].id, 28),
 
-        hug=models.CityState(cities['hug'].id, players['ryan'].id),
-        ash=models.CityState(cities['ash'].id, players['craig'].id),
+        hug=models.CityState(cities['hug'].id, players['ryan'].id, 28),
+        ash=models.CityState(cities['ash'].id, players['ryan'].id, 28),
         bat=models.CityState(cities['bat'].id, players['craig'].id, 26),
 
         sands=models.CityState(cities['sands'].id, players['david'].id, 26),
         ryangard=models.CityState(cities['ryangard'].id, players['ryan'].id),
-        ryborg=models.CityState(cities['ryborg'].id, players['ryan'].id, 26),
+        ryborg=models.CityState(cities['ryborg'].id, players['ryan'].id, 24),
 
         citadel=models.CityState(cities['citadel'].id, players['ryan'].id, 28),
         spikes=models.CityState(cities['spikes'].id, players['dang'].id, 26),
         temple=models.CityState(cities['temple'].id, players['craig'].id),
 
         taro=models.CityState(cities['taro'].id, players['edmond'].id, 26),
-        dry=models.CityState(cities['dry'].id, players['ryan'].id),
+        dry=models.CityState(cities['dry'].id, players['dang'].id),
         east=models.CityState(cities['east'].id, players['edmond'].id),
         high=models.CityState(cities['high'].id, players['dang'].id))
 
