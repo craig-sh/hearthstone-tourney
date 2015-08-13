@@ -18,7 +18,12 @@
         {{ render_field(form.attacking_class) }}
         {{ render_field(form.defending_class) }}
     </dl>
-    <input name="btn" type="submit" class="btn btn-success"></input>
+    <input name="btn" type="submit" class="btn btn-success" value="attack"></input>
+    <p>
+      <p>
+        <button type="submit" name="btn" class="btn btn-success" value="heal">+2 health to all cities</button>
+      </p>
+    </p>
   </form>
 </div>
 {% endblock %}

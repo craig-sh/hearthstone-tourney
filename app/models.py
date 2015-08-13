@@ -74,6 +74,11 @@ class CityState(db.Model):
         if health is not None:
             self.health = health
 
+    def add_health(self, health):
+        self.health += health
+        self.health = min(self.health, 30)
+        db.session.commit()
+
 
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True)
