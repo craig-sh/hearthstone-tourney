@@ -7,7 +7,7 @@ from .forms import ActionForm
 @app.route('/')
 @app.route('/index')
 def index():
-    regions = models.Region.query.all()
+    regions = models.Region.query.order_by(models.Region.name.asc())
     # flash('Testing flash')
     return render_template('index.html',
                            regions=regions)
